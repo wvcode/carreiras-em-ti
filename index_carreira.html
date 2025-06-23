@@ -2,411 +2,413 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espelho do Futuro</title>
-    <style>
-        :root {
-            --font-scale: min(2vw, 1.8em);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espelho do Futuro</title>
+  <style>
+    :root {
+      --font-scale: min(2vw, 1.8em);
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #262626;
-            text-align: center;
-            padding: 20px;
-            color: #ffffff;
-            position: relative;
-            box-sizing: border-box;
-        }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #262626;
+      text-align: center;
+      padding: 20px;
+      color: #ffffff;
+      position: relative;
+      box-sizing: border-box;
+    }
 
-        #logo {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 160px;
-        }
+    #logo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 160px;
+    }
 
-        #qr-container {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-        }
+    #qr-container {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
 
-        #qr-container p {
-            font-size: 1em;
-            margin: 0 0 4px 0;
-        }
+    #qr-container p {
+      font-size: 1em;
+      margin: 0 0 4px 0;
+    }
 
-        #qrcode {
-            width: 130px;
-            height: auto;
-        }
+    #qrcode {
+      width: 130px;
+      height: auto;
+    }
 
-        h1 {
-            font-size: calc(var(--font-scale) * 1.5);
-            margin-bottom: 10px;
-        }
+    h1 {
+      font-size: calc(var(--font-scale) * 1.5);
+      margin-bottom: 10px;
+    }
 
-        p {
-            font-size: calc(var(--font-scale) * 1.2);
-            font-weight: bold;
-            margin: 20px 0;
-        }
+    p {
+      font-size: calc(var(--font-scale) * 1.2);
+      font-weight: bold;
+      margin: 20px 0;
+    }
 
-        #message {
-            font-size: 1em;
-            margin: 10px 0;
-            opacity: 0.6;
-            animation: pulse 2s infinite;
-        }
+    #message {
+      font-size: 1em;
+      margin: 10px 0;
+      opacity: 0.6;
+      animation: pulse 2s infinite;
+    }
 
-        @keyframes pulse {
-            0% {
-                opacity: 0.4;
-            }
+    @keyframes pulse {
+      0% {
+        opacity: 0.4;
+      }
 
-            50% {
-                opacity: 0.8;
-            }
+      50% {
+        opacity: 0.8;
+      }
 
-            100% {
-                opacity: 0.4;
-            }
-        }
+      100% {
+        opacity: 0.4;
+      }
+    }
 
-        video {
-            display: block;
-            margin: 20px auto 10px auto;
-            border: 12px solid #dcdcdc;
-            border-radius: 16px;
-            background-color: #f5f5f5;
-            box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3);
-            width: 100%;
-            max-width: 800px;
-            height: auto;
-        }
+    video {
+      display: block;
+      margin: 20px auto 10px auto;
+      border: 12px solid #dcdcdc;
+      border-radius: 16px;
+      background-color: #f5f5f5;
+      box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3);
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+    }
 
-        button {
-            padding: 18px 40px;
-            font-size: 1.5em;
-            border-radius: 10px;
-            border: none;
-            margin: 20px;
-            cursor: pointer;
-            background-color: #1db280;
-            color: white;
-            transition: background 0.3s ease;
-        }
+    button {
+      padding: 18px 40px;
+      font-size: 1.5em;
+      border-radius: 10px;
+      border: none;
+      margin: 20px;
+      cursor: pointer;
+      background-color: #1db280;
+      color: white;
+      transition: background 0.3s ease;
+    }
 
-        button:hover {
-            background-color: #169768;
-        }
+    button:hover {
+      background-color: #169768;
+    }
 
-        #modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+    #modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+      box-sizing: border-box;
+    }
 
-        #modal-content {
-            background-color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            color: #fff;
-            width: 100%;
-            max-width: 90vw;
-        }
+    #modal-content {
+      background-color: #333;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      width: 100%;
+      max-width: 90vw;
+    }
 
-        #modal img {
-            width: 100%;
-            max-width: 1000px;
-            height: auto;
-            border: 4px solid #1db280;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
+    #modal img {
+      width: 100%;
+      max-width: 1000px;
+      height: auto;
+      border: 4px solid #1db280;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
 
-        @keyframes bounce {
+    @keyframes bounce {
 
-            0%,
-            100% {
-                transform: translateY(0);
-            }
+      0%,
+      100% {
+        transform: translateY(0);
+      }
 
-            50% {
-                transform: translateY(-8px);
-            }
-        }
-    </style>
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+  </style>
 </head>
 
 <body onload="enterFullscreen()">
 
-    <img src="img/atitus-logo-offwhite.png" id="logo" alt="Logo Atitus">
+  <img src="img/atitus-logo-offwhite.png" id="logo" alt="Logo Atitus">
 
 
-    <h1>👁️ Espelho do Futuro</h1>
-    <p>Descubra sua profissão do futuro na área da Computação:</p>
-    <div id="message">Aguardando leitura...</div>
-    <button onclick="showFuture()">🔮 Ver Meu Futuro</button>
+  <h1>👁️ Espelho do Futuro</h1>
+  <p>Descubra sua profissão do futuro na área da Computação:</p>
+  <div id="message">Aguardando leitura...</div>
+  <button onclick="showFuture()">🔮 Ver Meu Futuro</button>
 
-    <br><br>
-    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; align-items: flex-start;">
-        <video id="video" autoplay playsinline></video>
-        <div id="qr-container" style="position: fixed; bottom: 20px; right: 20px; text-align: center; z-index: 9999;">
-            <p style="margin: 0 0 4px 0; font-size: 1em;">Saiba mais</p>
-            <img src="img/qrcode.png" id="qrcode" alt="QR Code" style="width: 130px; height: auto;">
-        </div>
+  <br><br>
+  <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; align-items: flex-start;">
+    <video id="video" autoplay playsinline></video>
+    <div id="qr-container" style="position: fixed; bottom: 20px; right: 20px; text-align: center; z-index: 9999;">
+      <p style="margin: 0 0 4px 0; font-size: 1em;">Saiba mais</p>
+      <img src="img/qrcode.png" id="qrcode" alt="QR Code" style="width: 130px; height: auto;">
     </div>
-    <canvas id="canvas" width="1000" height="750" style="display: none;"></canvas>
+  </div>
+  <canvas id="canvas" width="1000" height="750" style="display: none;"></canvas>
 
-    <div id="modal"
-        style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.85); justify-content: center; align-items: center; z-index: 1000; padding: 20px; box-sizing: border-box; overflow: hidden;">
-        <div id="modal-content"
-            style="background-color: #333; padding: 20px; border-radius: 10px; text-align: center; color: #fff; width: 95vw; max-width: 700px; overflow: hidden;">
-            <img id="photo" src="" alt="Sua foto do futuro">
-            <p id="modal-message"></p>
-            <button onclick="closeModal()">Saiba Mais</button>
-        </div>
+  <div id="modal"
+    style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.85); justify-content: center; align-items: center; z-index: 1000; padding: 20px; box-sizing: border-box; overflow: hidden;">
+    <div id="modal-content"
+      style="background-color: #333; padding: 20px; border-radius: 10px; text-align: center; color: #fff; width: 95vw; max-width: 700px; overflow: hidden;">
+      <img id="photo" src="" alt="Sua foto do futuro">
+      <p id="modal-message"></p>
+      <button onclick="closeModal()">Saiba Mais</button>
     </div>
+  </div>
 
-    <script>
-        const messages = [
-            "🧠 Você fez cara de quem pensa rápido… Tem futuro como Engenheiro(a) de Software!",
-            "💻 Concentrado(a) e analítico(a)? Desenvolvedor(a) Web Full Stack na certa!",
-            "💡 Olhar curioso detectado: temos um(a) Cientista de Dados chegando!",
-            "🤖 Seu futuro? Criar IAs incríveis como essa aqui!",
-            "☁️ Visão de futuro? Arquiteto(a) de Soluções em Nuvem vem aí!",
-            "🛡️ Sério(a) e atento(a)? Analista de Cibersegurança te define!",
-            "🔁 Pensando em automação? Engenheiro(a) DevOps no radar!",
-            "👾 Criatividade em alta: você será um(a) Dev de Jogos!",
-            "🎨 Sensibilidade apurada: UX Designer brilhando!",
-            "🧬 Raciocínio de máquina? Engenheiro(a) de Machine Learning!",
-            "📊 Você enxerga o todo: Analista de Sistemas!",
-            "📱 Praticidade no olhar: Desenvolvedor(a) Mobile a caminho!",
-            "🧪 Cientista nato(a)? Pesquisador(a) em TI no seu futuro!",
-            "📂 Organizado(a) e estratégico(a)? Arquiteto(a) de Dados!",
-            "🔐 Criptografia é seu estilo: Especialista em Blockchain!",
-            "🚀 Começando com tudo: você será um(a) Desenvolvedor(a) Júnior promissor(a)!",
-            "🌍 Espírito aventureiro? Você será um(a) freelancer internacional de tecnologia!",
-            "🧭 Perfil inspirador: futuro(a) líder de equipes de TI em construção!",
-            "🧰 Você tem cara de quem resolve problemas — perfeito(a) para Suporte Técnico em TI!",
-            "📡 Rumo ao espaço digital: Engenheiro(a) de Redes e Infraestrutura!",
-            "📈 Visão estratégica aguçada: carreira em Gestão em TI no seu futuro!"
-        ];
+  <script>
+    const messages = [
+      "🧠 Você fez cara de quem pensa rápido… Tem futuro como Engenheiro(a) de Software!",
+      "💻 Concentrado(a) e analítico(a)? Desenvolvedor(a) Web Full Stack na certa!",
+      "💡 Olhar curioso detectado: temos um(a) Cientista de Dados chegando!",
+      "🤖 Seu futuro? Criar IAs incríveis como essa aqui!",
+      "☁️ Visão de futuro? Arquiteto(a) de Soluções em Nuvem vem aí!",
+      "🛡️ Sério(a) e atento(a)? Analista de Cibersegurança te define!",
+      "🔁 Pensando em automação? Engenheiro(a) DevOps no radar!",
+      "👾 Criatividade em alta: você será um(a) Dev de Jogos!",
+      "🎨 Sensibilidade apurada: UX Designer brilhando!",
+      "🧬 Raciocínio de máquina? Engenheiro(a) de Machine Learning!",
+      "📊 Você enxerga o todo: Analista de Sistemas!",
+      "📱 Praticidade no olhar: Desenvolvedor(a) Mobile a caminho!",
+      "🧪 Cientista nato(a)? Pesquisador(a) em TI no seu futuro!",
+      "📂 Organizado(a) e estratégico(a)? Arquiteto(a) de Dados!",
+      "🔐 Criptografia é seu estilo: Especialista em Blockchain!",
+      "🚀 Começando com tudo: você será um(a) Desenvolvedor(a) Júnior promissor(a)!",
+      "🌍 Espírito aventureiro? Você será um(a) freelancer internacional de tecnologia!",
+      "🧭 Perfil inspirador: futuro(a) líder de equipes de TI em construção!",
+      "🧰 Você tem cara de quem resolve problemas — perfeito(a) para Suporte Técnico em TI!",
+      "📡 Rumo ao espaço digital: Engenheiro(a) de Redes e Infraestrutura!",
+      "📈 Visão estratégica aguçada: carreira em Gestão em TI no seu futuro!"
+    ];
 
-        const canvas = document.getElementById('canvas');
-        const context = canvas.getContext('2d');
-        const modal = document.getElementById('modal');
-        const modalPhoto = document.getElementById('photo');
-        const modalMessage = document.getElementById('modal-message');
-        const messageDiv = document.getElementById('message');
+    const canvas = document.getElementById('canvas');
+    const context = canvas.getContext('2d');
+    const modal = document.getElementById('modal');
+    const modalPhoto = document.getElementById('photo');
+    const modalMessage = document.getElementById('modal-message');
+    const messageDiv = document.getElementById('message');
 
-        const video = document.getElementById('video');
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then((stream) => {
-                video.srcObject = stream;
-            })
-            .catch((err) => {
-                alert('Erro ao acessar a câmera: ' + err);
-            });
+    const video = document.getElementById('video');
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then((stream) => {
+        video.srcObject = stream;
+      })
+      .catch((err) => {
+        alert('Erro ao acessar a câmera: ' + err);
+      });
 
-        function showFuture() {
-            const index = Math.floor(Math.random() * messages.length);
-            const message = messages[index];
-            messageDiv.innerText = message;
+    function showFuture() {
+      const index = Math.floor(Math.random() * messages.length);
+      const message = messages[index];
+      messageDiv.innerText = message;
 
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            const imageData = canvas.toDataURL('image/png');
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const imageData = canvas.toDataURL('image/png');
 
-            modalPhoto.src = imageData;
-            modalMessage.innerText = message;
-            modal.style.display = 'flex';
-        }
+      modalPhoto.src = imageData;
+      modalMessage.innerText = message;
+      modal.style.display = 'flex';
+    }
 
-        function closeModal() {
-            modal.style.display = 'none';
+    function closeModal() {
+      modal.style.display = 'none';
 
-            const messageText = modalMessage.innerText;
-            const areaKey = Object.keys(curiosidades).find(key => messageText.includes(key));
-            if (areaKey) {
-                const dados = curiosidades[areaKey];
-                const titulo = areaKey;
-                document.getElementById('curiosidade-titulo').innerText = titulo;
-                document.getElementById('curiosidade-sumario').innerText = dados.sumario;
-                document.getElementById('curiosidade-texto').innerText = dados.curiosidade;
-                document.getElementById('curiosidade-ajuda').innerText = dados.comoAAtitusAjuda || '';
-                document.getElementById('modal-curiosidade').style.display = 'flex';
-            }
+      const messageText = modalMessage.innerText;
+      const areaKey = Object.keys(curiosidades).find(key => messageText.includes(key));
+      if (areaKey) {
+        const dados = curiosidades[areaKey];
+        const titulo = areaKey;
+        document.getElementById('curiosidade-titulo').innerText = titulo;
+        document.getElementById('curiosidade-sumario').innerText = dados.sumario;
+        document.getElementById('curiosidade-texto').innerText = dados.curiosidade;
+        document.getElementById('curiosidade-ajuda').innerText = dados.comoAAtitusAjuda || '';
+        document.getElementById('modal-curiosidade').style.display = 'flex';
+      }
 
-            messageDiv.innerText = "Aguardando leitura...";
-            messageDiv.innerText = "Aguardando leitura...";
-        }
-        function enterFullscreen() {
-            const elem = document.documentElement;
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen();
-            } else if (elem.webkitRequestFullscreen) { /* Safari */
-                elem.webkitRequestFullscreen();
-            } else if (elem.msRequestFullscreen) { /* IE11 */
-                elem.msRequestFullscreen();
-            }
-        }
-        const curiosidades = {
-            "Arquiteto(a) de Dados": {
-                "sumario": "Profissional responsável por planejar, estruturar e organizar a arquitetura de dados de uma organização, garantindo qualidade, integridade e governança dos dados.",
-                "curiosidade": "Sabe aquele caos de planilhas? O arquiteto de dados é quem transforma tudo em informação organizada e útil.",
-                "comoAAtitusAjuda": "Na Atitus, você aprende arquitetura de dados com foco em organização, governança e qualidade da informação, em disciplinas como Big Data, Banco de Dados e Engenharia de Dados."
-            },
-            "Desenvolvedor(a) Mobile": {
-                "sumario": "Profissional especializado em criar aplicativos para dispositivos móveis, como smartphones e tablets, utilizando diferentes plataformas e linguagens.",
-                "curiosidade": "O primeiro aplicativo móvel foi criado para o IBM Simon, considerado o primeiro smartphone do mundo, em 1994.",
-                "comoAAtitusAjuda": "Na Atitus, você aprende a desenvolver apps com foco em usabilidade, front-end e integração com sistemas, por meio de disciplinas como Desenvolvimento de Soluções, User Experience e Projetos Reais em diferentes nanodegrees."
-            },
-            "Analista de Sistemas": {
-                "sumario": "Profissional responsável por analisar, especificar, modelar e propor soluções tecnológicas para otimizar processos e fluxos de informação em empresas.",
-                "curiosidade": "Dizem que todo(a) Analista de Sistemas tem superpoderes: entendem o que o cliente quer, o que o sistema faz — e ainda traduzem isso tudo para quem programa!",
-                "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira com foco em análise, modelagem e otimização de sistemas, por meio de disciplinas como Engenharia de Processos, Organização de Sistemas e Gestão de Projetos."
-            },
-            "Engenheiro(a) de Software": {
-                "sumario": "Profissional responsável pelo desenvolvimento, manutenção e evolução de sistemas de software, garantindo qualidade, escalabilidade e segurança das aplicações.",
-                "curiosidade": "O termo 'engenharia de software' foi popularizado após uma conferência da OTAN em 1968, quando grandes projetos começaram a enfrentar problemas de 'crise do software'.",
-                "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira desde o primeiro nanodegree, com disciplinas práticas como Pensamento Computacional e Engenharia de Processos, participação em projetos reais e apoio da Aceleradora de Carreiras."
-            },
-            "Desenvolvedor(a) Web Full Stack": {
-                "sumario": "Profissional que atua tanto no desenvolvimento do front-end quanto do back-end de aplicações web, dominando múltiplas tecnologias.",
-                "curiosidade": "Apesar do termo 'full stack' ser recente, a prática de atuar em várias camadas da aplicação existe desde os primórdios da web.",
-                "comoAAtitusAjuda": "Na Atitus, você aprende desenvolvimento web de ponta a ponta com foco em aplicações práticas. Os nanodegrees incluem disciplinas como Front-End, User Experience e Integração de Soluções, aliando design e programação para o mercado digital."
-            },
-            "Cientista de Dados": {
-                "sumario": "Profissional especializado em analisar grandes volumes de dados para extrair insights e apoiar decisões estratégicas utilizando estatística, programação e machine learning.",
-                "curiosidade": "A Harvard Business Review chamou a profissão de cientista de dados como 'a profissão mais sexy do século XXI'.",
-                "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira com projetos reais, mentorias da Aceleradora de Carreiras, atividades práticas integradas e disciplinas técnicas, sempre conectadas às demandas do mercado e alinhadas às verticais de Inteligência de Dados, Inovação e Liderança."
-            },
-            "Arquiteto(a) de Soluções em Nuvem": {
-                "sumario": "Profissional que projeta, implementa e gerencia soluções de tecnologia baseadas em computação em nuvem, visando escalabilidade e resiliência.",
-                "curiosidade": "Sabe quando seus arquivos ficam salvos no Google Drive ou no celular sem ocupar espaço? Isso é computação em nuvem — e 9 em cada 10 empresas do mundo já usam.",
-                "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira com projetos reais, mentorias da Aceleradora de Carreiras, atividades práticas integradas e disciplinas técnicas, sempre conectadas às demandas do mercado e alinhadas às verticais de Inteligência de Dados, Inovação e Liderança."
-            },
-            "Analista de Cibersegurança": {
-                "sumario": "Profissional que atua na proteção de sistemas, redes e dados contra ataques cibernéticos, identificando vulnerabilidades e propondo soluções de defesa.",
-                "curiosidade": "O primeiro vírus de computador da história, chamado 'Creeper', surgiu em 1971 como um experimento inofensivo.",
-                "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira com projetos reais, mentorias da Aceleradora de Carreiras, atividades práticas integradas e disciplinas técnicas, sempre conectadas às demandas do mercado e alinhadas às verticais de Inteligência de Dados, Inovação e Liderança."
-            },
-            "Engenheiro(a) DevOps": {
-                "sumario": "Profissional que integra práticas de desenvolvimento de software (Dev) e operações de TI (Ops) para automatizar e otimizar processos, melhorando a entrega contínua.",
-                "curiosidade": "DevOps é a junção de 'Desenvolvimento' e 'Operações' — uma cultura que ajuda empresas a entregarem software mais rápido, com mais qualidade e menos retrabalho.",
-                "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira com projetos reais, mentorias da Aceleradora de Carreiras, atividades práticas integradas e disciplinas técnicas, sempre conectadas às demandas do mercado e alinhadas às verticais de Inteligência de Dados, Inovação e Liderança."
-            },
-            "Dev de Jogos": {
-                "sumario": "Profissional dedicado à criação, desenvolvimento e testes de jogos digitais, trabalhando com programação, arte e design de jogos.",
-                "curiosidade": "O primeiro videogame comercial foi 'Pong', lançado em 1972 pela Atari.",
-                "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira com projetos reais, mentorias da Aceleradora de Carreiras, atividades práticas integradas e disciplinas técnicas, sempre conectadas às demandas do mercado e alinhadas às verticais de Inteligência de Dados, Inovação e Liderança."
-            },
-            "UX Designer": {
-                "sumario": "Profissional que projeta experiências e interfaces centradas no usuário, buscando facilidade, eficiência e satisfação na interação com produtos digitais.",
-                "curiosidade": "Don Norman criou o termo 'User Experience' na Apple nos anos 90 — hoje, o design centrado no usuário é considerado essencial por 9 em cada 10 empresas digitais.",
-                "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira com projetos reais, mentorias da Aceleradora de Carreiras, atividades práticas integradas e disciplinas técnicas, sempre conectadas às demandas do mercado e alinhadas às verticais de Inteligência de Dados, Inovação e Liderança."
-            },
-            "Engenheiro(a) de Machine Learning": {
-                "sumario": "Profissional que desenvolve e aplica algoritmos de aprendizado de máquina para resolver problemas complexos utilizando dados.",
-                "curiosidade": "O machine learning foi inspirado pelo funcionamento do cérebro humano e redes neurais biológicas.",
-                "comoAAtitusAjuda": "Na Atitus, você aprende Machine Learning com foco em aplicações reais, por meio de disciplinas como Inteligência Artificial, Big Data e Projetos de Inovação, integradas à vertical de Inteligência de Dados."
-            },
-            "Especialista em Blockchain": {
-                "sumario": "Profissional que desenvolve e mantém soluções baseadas em blockchain, garantindo segurança, transparência e descentralização de aplicações e transações.",
-                "curiosidade": "O mercado global de blockchain deve ultrapassar US$ 94 bilhões até 2027, impulsionando a demanda por profissionais especializados nessa tecnologia.",
-                "comoAAtitusAjuda": "Na Atitus, você explora o universo do blockchain em disciplinas como Tecnologias Emergentes, Inovação e Direito Aplicado a Startups, com foco em segurança, descentralização e aplicações reais do mercado."
-            },
-            "Desenvolvedor(a) Júnior": {
-                "sumario": "Profissional em início de carreira na área de desenvolvimento de software, responsável por implementar funcionalidades simples e evoluir em conhecimento técnico.",
-                "curiosidade": "Segundo dados do Glassdoor e da Revelo, Desenvolvedor(a) Júnior é uma das posições mais ofertadas em tecnologia no Brasil, sendo a principal porta de entrada para a área.",
-                "comoAAtitusAjuda": "Na Atitus, você inicia sua jornada em nanodegrees de base sólida como Pensamento Computacional e Desenvolvimento de Aplicações, com desafios práticos desde o primeiro semestre."
-            },
-            "freelancer internacional de tecnologia": {
-                "sumario": "Profissional autônomo que presta serviços para empresas ou clientes internacionais de forma remota, em áreas como desenvolvimento, design e suporte técnico.",
-                "curiosidade": "Sabia que você pode programar do sofá de casa para empresas na Europa ou nos EUA? Tudo que precisa é Wi-Fi… e talento!",
-                "comoAAtitusAjuda": "Na Atitus, você desenvolve autonomia e portfólio para atuar globalmente, com projetos reais, formação empreendedora e conexão com as verticais de Inovação e Liderança."
-            },
-            "Líder de equipes de TI": {
-                "sumario": "Profissional que coordena e gerencia equipes técnicas, garantindo produtividade, integração e sucesso em projetos de tecnologia.",
-                "curiosidade": "Segundo a pesquisa 'Mulheres na TI' da Brasscom, o número de mulheres em cargos de liderança no setor de tecnologia tem crescido nos últimos anos — o futuro também é delas.",
-                "comoAAtitusAjuda": "Na Atitus, você desenvolve competências de liderança por meio das disciplinas de Desafios de Comportamento, Comunicação, Empreendedorismo e Tecnologias, com foco em trabalho em equipe, protagonismo e tomada de decisão."
-            },
-            "Suporte Técnico em TI": {
-                "sumario": "Profissional que auxilia usuários e empresas na resolução de problemas técnicos com computadores, redes, sistemas e softwares.",
-                "curiosidade": "Você sabe que é do suporte quando resolve o problema só de olhar — ou de pedir pra reiniciar!",
-                "comoAAtitusAjuda": "Na Atitus, você desenvolve essa base nos primeiros nanodegrees com conteúdos de infraestrutura, sistemas operacionais e fundamentos de redes, preparando você para resolver problemas técnicos do mundo real."
-            },
-            "Engenheiro(a) de Redes e Infraestrutura": {
-                "sumario": "Profissional que projeta, implementa e mantém redes de computadores e estruturas tecnológicas robustas para empresas.",
-                "curiosidade": "Na TI, quando tudo funciona e ninguém percebe, provavelmente foi um engenheiro(a) de redes que fez bem o seu trabalho!",
-                "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira com conteúdos de arquitetura de computadores, redes, computação distribuída e fundamentos de infraestrutura, atuando em projetos conectados à realidade das empresas."
-            },
-            "Gestão em TI": {
-                "sumario": "Profissional responsável por planejar, coordenar e administrar recursos tecnológicos alinhados à estratégia da organização.",
-                "curiosidade": "Segundo o LinkedIn, gestores de TI estão entre os cargos mais procurados na área de tecnologia — e mais da metade dessas vagas exigem habilidades de liderança e inovação.",
-                "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira com foco em visão estratégica, inovação e liderança, por meio de conteúdos como Gestão de Projetos, Direito Aplicado a Startups e Desafios Empreendedores."
-            },
-            "Pesquisador(a) em TI": {
-                "sumario": "Profissional que atua com investigação aplicada ou acadêmica em temas como inteligência artificial, ciência de dados, segurança digital e novas tecnologias.",
-                "curiosidade": "O Brasil é um dos países com maior número de publicações científicas em ciência da computação na América Latina, e a área segue em expansão com apoio de universidades e centros de inovação.",
-                "comoAAtitusAjuda": "Na Atitus, você pode explorar essa carreira por meio de iniciação científica, desafios de inovação e projetos integrados aos nanodegrees de Inteligência de Dados, Inovação e Computação Distribuída."
-            }
-        };
+      messageDiv.innerText = "Aguardando leitura...";
+      messageDiv.innerText = "Aguardando leitura...";
+    }
 
-        function closeModal() {
-            modal.style.display = 'none';
-            messageDiv.innerText = "Aguardando leitura...";
-            const messageText = modalMessage.innerText;
-            const areaKey = Object.keys(curiosidades).find(key => messageText.includes(key));
-            if (areaKey) {
-                const dados = curiosidades[areaKey];
-                const titulo = areaKey;
-                document.getElementById('curiosidade-titulo').innerText = titulo;
-                document.getElementById('curiosidade-sumario').innerText = dados.sumario;
-                document.getElementById('curiosidade-texto').innerText = dados.curiosidade;
-                document.getElementById('curiosidade-ajuda').innerText = dados.comoAAtitusAjuda || '';
-                document.getElementById('modal-curiosidade').style.display = 'flex';
-            }
-        }
+    function enterFullscreen() {
+      const elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+      }
+    }
 
-        function fecharCuriosidade() {
-            document.getElementById('modal-curiosidade').style.display = 'none';
-        }
-    </script>
-    <!-- Modal Curiosidade -->
-    <!-- Modal Curiosidade -->
-    <div id="modal-curiosidade"
-        style="display: flex; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.85); justify-content: center; align-items: center; z-index: 1001; padding: 20px; box-sizing: border-box; overflow-y: auto;">
-        <div
-            style="background-color: #1f1f1f; padding: 30px; border-radius: 16px; color: #ffffff; width: 95vw; max-width: 700px; box-shadow: 0 0 20px rgba(0,0,0,0.5); font-family: Arial, sans-serif;">
-            <h2 id="curiosidade-titulo" style="font-size: 2.6em; color: #67bff9; margin-bottom: 14px;"></h2>
-            <p id="curiosidade-sumario" style="font-size: 1.6em; line-height: 1.6; margin-bottom: 24px;"></p>
-            <p style="font-size: 1.4em; margin-bottom: 14px;"><strong style="color: #ec81c8;">Curiosidade:</strong>
-                <span id="curiosidade-texto"></span>
-            </p>
-            <p style="font-size: 1.4em; margin-bottom: 24px;"><strong style="color: #ffaa72;">Como a Atitus pode te
-                    ajudar:</strong> <span id="curiosidade-ajuda"></span></p>
-            <div style="text-align: center;">
-                <button onclick="fecharCuriosidade()"
-                    style="padding: 16px 36px; font-size: 1.6em; border-radius: 10px; border: none; cursor: pointer; background-color: #ffaa72; color: white;">Fechar</button>
-            </div>
-        </div>
+    const curiosidades = {
+      "Arquiteto(a) de Dados": {
+        "sumario": "Profissional responsável por planejar, estruturar e organizar a arquitetura de dados de uma organização, garantindo qualidade, integridade e governança dos dados.",
+        "curiosidade": "Sabe aquele caos de planilhas? O arquiteto de dados é quem transforma tudo em informação organizada e útil.",
+        "comoAAtitusAjuda": "Na Atitus, você aprende arquitetura de dados com foco em organização, governança e qualidade da informação, em disciplinas como Big Data, Banco de Dados e Engenharia de Dados."
+      },
+      "Desenvolvedor(a) Mobile": {
+        "sumario": "Profissional especializado em criar aplicativos para dispositivos móveis, como smartphones e tablets, utilizando diferentes plataformas e linguagens.",
+        "curiosidade": "O primeiro aplicativo móvel foi criado para o IBM Simon, considerado o primeiro smartphone do mundo, em 1994.",
+        "comoAAtitusAjuda": "Na Atitus, você aprende a desenvolver apps com foco em usabilidade, front-end e integração com sistemas, por meio de disciplinas como Desenvolvimento de Soluções, User Experience e Projetos Reais em diferentes nanodegrees."
+      },
+      "Analista de Sistemas": {
+        "sumario": "Profissional responsável por analisar, especificar, modelar e propor soluções tecnológicas para otimizar processos e fluxos de informação em empresas.",
+        "curiosidade": "Dizem que todo(a) Analista de Sistemas tem superpoderes: entendem o que o cliente quer, o que o sistema faz — e ainda traduzem isso tudo para quem programa!",
+        "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira com foco em análise, modelagem e otimização de sistemas, por meio de disciplinas como Engenharia de Processos, Organização de Sistemas e Gestão de Projetos."
+      },
+      "Engenheiro(a) de Software": {
+        "sumario": "Profissional responsável pelo desenvolvimento, manutenção e evolução de sistemas de software, garantindo qualidade, escalabilidade e segurança das aplicações.",
+        "curiosidade": "O termo 'engenharia de software' foi popularizado após uma conferência da OTAN em 1968, quando grandes projetos começaram a enfrentar problemas de 'crise do software'.",
+        "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira desde o primeiro nanodegree, com disciplinas práticas como Pensamento Computacional e Engenharia de Processos, participação em projetos reais e apoio da Aceleradora de Carreiras."
+      },
+      "Desenvolvedor(a) Web Full Stack": {
+        "sumario": "Profissional que atua tanto no desenvolvimento do front-end quanto do back-end de aplicações web, dominando múltiplas tecnologias.",
+        "curiosidade": "Apesar do termo 'full stack' ser recente, a prática de atuar em várias camadas da aplicação existe desde os primórdios da web.",
+        "comoAAtitusAjuda": "Na Atitus, você aprende desenvolvimento web de ponta a ponta com foco em aplicações práticas. Os nanodegrees incluem disciplinas como Front-End, User Experience e Integração de Soluções, aliando design e programação para o mercado digital."
+      },
+      "Cientista de Dados": {
+        "sumario": "Profissional especializado em analisar grandes volumes de dados para extrair insights e apoiar decisões estratégicas utilizando estatística, programação e machine learning.",
+        "curiosidade": "A Harvard Business Review chamou a profissão de cientista de dados como 'a profissão mais sexy do século XXI'.",
+        "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira com projetos reais, mentorias da Aceleradora de Carreiras, atividades práticas integradas e disciplinas técnicas, sempre conectadas às demandas do mercado e alinhadas às verticais de Inteligência de Dados, Inovação e Liderança."
+      },
+      "Arquiteto(a) de Soluções em Nuvem": {
+        "sumario": "Profissional que projeta, implementa e gerencia soluções de tecnologia baseadas em computação em nuvem, visando escalabilidade e resiliência.",
+        "curiosidade": "Sabe quando seus arquivos ficam salvos no Google Drive ou no celular sem ocupar espaço? Isso é computação em nuvem — e 9 em cada 10 empresas do mundo já usam.",
+        "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira com projetos reais, mentorias da Aceleradora de Carreiras, atividades práticas integradas e disciplinas técnicas, sempre conectadas às demandas do mercado e alinhadas às verticais de Inteligência de Dados, Inovação e Liderança."
+      },
+      "Analista de Cibersegurança": {
+        "sumario": "Profissional que atua na proteção de sistemas, redes e dados contra ataques cibernéticos, identificando vulnerabilidades e propondo soluções de defesa.",
+        "curiosidade": "O primeiro vírus de computador da história, chamado 'Creeper', surgiu em 1971 como um experimento inofensivo.",
+        "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira com projetos reais, mentorias da Aceleradora de Carreiras, atividades práticas integradas e disciplinas técnicas, sempre conectadas às demandas do mercado e alinhadas às verticais de Inteligência de Dados, Inovação e Liderança."
+      },
+      "Engenheiro(a) DevOps": {
+        "sumario": "Profissional que integra práticas de desenvolvimento de software (Dev) e operações de TI (Ops) para automatizar e otimizar processos, melhorando a entrega contínua.",
+        "curiosidade": "DevOps é a junção de 'Desenvolvimento' e 'Operações' — uma cultura que ajuda empresas a entregarem software mais rápido, com mais qualidade e menos retrabalho.",
+        "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira com projetos reais, mentorias da Aceleradora de Carreiras, atividades práticas integradas e disciplinas técnicas, sempre conectadas às demandas do mercado e alinhadas às verticais de Inteligência de Dados, Inovação e Liderança."
+      },
+      "Dev de Jogos": {
+        "sumario": "Profissional dedicado à criação, desenvolvimento e testes de jogos digitais, trabalhando com programação, arte e design de jogos.",
+        "curiosidade": "O primeiro videogame comercial foi 'Pong', lançado em 1972 pela Atari.",
+        "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira com projetos reais, mentorias da Aceleradora de Carreiras, atividades práticas integradas e disciplinas técnicas, sempre conectadas às demandas do mercado e alinhadas às verticais de Inteligência de Dados, Inovação e Liderança."
+      },
+      "UX Designer": {
+        "sumario": "Profissional que projeta experiências e interfaces centradas no usuário, buscando facilidade, eficiência e satisfação na interação com produtos digitais.",
+        "curiosidade": "Don Norman criou o termo 'User Experience' na Apple nos anos 90 — hoje, o design centrado no usuário é considerado essencial por 9 em cada 10 empresas digitais.",
+        "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira com projetos reais, mentorias da Aceleradora de Carreiras, atividades práticas integradas e disciplinas técnicas, sempre conectadas às demandas do mercado e alinhadas às verticais de Inteligência de Dados, Inovação e Liderança."
+      },
+      "Engenheiro(a) de Machine Learning": {
+        "sumario": "Profissional que desenvolve e aplica algoritmos de aprendizado de máquina para resolver problemas complexos utilizando dados.",
+        "curiosidade": "O machine learning foi inspirado pelo funcionamento do cérebro humano e redes neurais biológicas.",
+        "comoAAtitusAjuda": "Na Atitus, você aprende Machine Learning com foco em aplicações reais, por meio de disciplinas como Inteligência Artificial, Big Data e Projetos de Inovação, integradas à vertical de Inteligência de Dados."
+      },
+      "Especialista em Blockchain": {
+        "sumario": "Profissional que desenvolve e mantém soluções baseadas em blockchain, garantindo segurança, transparência e descentralização de aplicações e transações.",
+        "curiosidade": "O mercado global de blockchain deve ultrapassar US$ 94 bilhões até 2027, impulsionando a demanda por profissionais especializados nessa tecnologia.",
+        "comoAAtitusAjuda": "Na Atitus, você explora o universo do blockchain em disciplinas como Tecnologias Emergentes, Inovação e Direito Aplicado a Startups, com foco em segurança, descentralização e aplicações reais do mercado."
+      },
+      "Desenvolvedor(a) Júnior": {
+        "sumario": "Profissional em início de carreira na área de desenvolvimento de software, responsável por implementar funcionalidades simples e evoluir em conhecimento técnico.",
+        "curiosidade": "Segundo dados do Glassdoor e da Revelo, Desenvolvedor(a) Júnior é uma das posições mais ofertadas em tecnologia no Brasil, sendo a principal porta de entrada para a área.",
+        "comoAAtitusAjuda": "Na Atitus, você inicia sua jornada em nanodegrees de base sólida como Pensamento Computacional e Desenvolvimento de Aplicações, com desafios práticos desde o primeiro semestre."
+      },
+      "freelancer internacional de tecnologia": {
+        "sumario": "Profissional autônomo que presta serviços para empresas ou clientes internacionais de forma remota, em áreas como desenvolvimento, design e suporte técnico.",
+        "curiosidade": "Sabia que você pode programar do sofá de casa para empresas na Europa ou nos EUA? Tudo que precisa é Wi-Fi… e talento!",
+        "comoAAtitusAjuda": "Na Atitus, você desenvolve autonomia e portfólio para atuar globalmente, com projetos reais, formação empreendedora e conexão com as verticais de Inovação e Liderança."
+      },
+      "Líder de equipes de TI": {
+        "sumario": "Profissional que coordena e gerencia equipes técnicas, garantindo produtividade, integração e sucesso em projetos de tecnologia.",
+        "curiosidade": "Segundo a pesquisa 'Mulheres na TI' da Brasscom, o número de mulheres em cargos de liderança no setor de tecnologia tem crescido nos últimos anos — o futuro também é delas.",
+        "comoAAtitusAjuda": "Na Atitus, você desenvolve competências de liderança por meio das disciplinas de Desafios de Comportamento, Comunicação, Empreendedorismo e Tecnologias, com foco em trabalho em equipe, protagonismo e tomada de decisão."
+      },
+      "Suporte Técnico em TI": {
+        "sumario": "Profissional que auxilia usuários e empresas na resolução de problemas técnicos com computadores, redes, sistemas e softwares.",
+        "curiosidade": "Você sabe que é do suporte quando resolve o problema só de olhar — ou de pedir pra reiniciar!",
+        "comoAAtitusAjuda": "Na Atitus, você desenvolve essa base nos primeiros nanodegrees com conteúdos de infraestrutura, sistemas operacionais e fundamentos de redes, preparando você para resolver problemas técnicos do mundo real."
+      },
+      "Engenheiro(a) de Redes e Infraestrutura": {
+        "sumario": "Profissional que projeta, implementa e mantém redes de computadores e estruturas tecnológicas robustas para empresas.",
+        "curiosidade": "Na TI, quando tudo funciona e ninguém percebe, provavelmente foi um engenheiro(a) de redes que fez bem o seu trabalho!",
+        "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira com conteúdos de arquitetura de computadores, redes, computação distribuída e fundamentos de infraestrutura, atuando em projetos conectados à realidade das empresas."
+      },
+      "Gestão em TI": {
+        "sumario": "Profissional responsável por planejar, coordenar e administrar recursos tecnológicos alinhados à estratégia da organização.",
+        "curiosidade": "Segundo o LinkedIn, gestores de TI estão entre os cargos mais procurados na área de tecnologia — e mais da metade dessas vagas exigem habilidades de liderança e inovação.",
+        "comoAAtitusAjuda": "Na Atitus, você desenvolve essa carreira com foco em visão estratégica, inovação e liderança, por meio de conteúdos como Gestão de Projetos, Direito Aplicado a Startups e Desafios Empreendedores."
+      },
+      "Pesquisador(a) em TI": {
+        "sumario": "Profissional que atua com investigação aplicada ou acadêmica em temas como inteligência artificial, ciência de dados, segurança digital e novas tecnologias.",
+        "curiosidade": "O Brasil é um dos países com maior número de publicações científicas em ciência da computação na América Latina, e a área segue em expansão com apoio de universidades e centros de inovação.",
+        "comoAAtitusAjuda": "Na Atitus, você pode explorar essa carreira por meio de iniciação científica, desafios de inovação e projetos integrados aos nanodegrees de Inteligência de Dados, Inovação e Computação Distribuída."
+      }
+    };
+
+    function closeModal() {
+      modal.style.display = 'none';
+      messageDiv.innerText = "Aguardando leitura...";
+      const messageText = modalMessage.innerText;
+      const areaKey = Object.keys(curiosidades).find(key => messageText.includes(key));
+      if (areaKey) {
+        const dados = curiosidades[areaKey];
+        const titulo = areaKey;
+        document.getElementById('curiosidade-titulo').innerText = titulo;
+        document.getElementById('curiosidade-sumario').innerText = dados.sumario;
+        document.getElementById('curiosidade-texto').innerText = dados.curiosidade;
+        document.getElementById('curiosidade-ajuda').innerText = dados.comoAAtitusAjuda || '';
+        document.getElementById('modal-curiosidade').style.display = 'flex';
+      }
+    }
+
+    function fecharCuriosidade() {
+      document.getElementById('modal-curiosidade').style.display = 'none';
+    }
+  </script>
+  <!-- Modal Curiosidade -->
+  <!-- Modal Curiosidade -->
+  <div id="modal-curiosidade"
+    style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.85); justify-content: center; align-items: center; z-index: 1001; padding: 20px; box-sizing: border-box; overflow-y: auto;">
+    <div
+      style="background-color: #1f1f1f; padding: 30px; border-radius: 16px; color: #ffffff; width: 95vw; max-width: 700px; box-shadow: 0 0 20px rgba(0,0,0,0.5); font-family: Arial, sans-serif;">
+      <h2 id="curiosidade-titulo" style="font-size: 2.6em; color: #67bff9; margin-bottom: 14px;"></h2>
+      <p id="curiosidade-sumario" style="font-size: 1.6em; line-height: 1.6; margin-bottom: 24px;"></p>
+      <p style="font-size: 1.4em; margin-bottom: 14px;"><strong style="color: #ec81c8;">Curiosidade:</strong>
+        <span id="curiosidade-texto"></span>
+      </p>
+      <p style="font-size: 1.4em; margin-bottom: 24px;"><strong style="color: #ffaa72;">Como a Atitus pode te
+          ajudar:</strong> <span id="curiosidade-ajuda"></span></p>
+      <div style="text-align: center;">
+        <button onclick="fecharCuriosidade()"
+          style="padding: 16px 36px; font-size: 1.6em; border-radius: 10px; border: none; cursor: pointer; background-color: #ffaa72; color: white;">Fechar</button>
+      </div>
     </div>
+  </div>
 </body>
 
 </html>
